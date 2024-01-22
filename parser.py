@@ -32,3 +32,5 @@ while Str!=None:
     Str=FH.readline()
 
 print(LastWords)
+
+FH.close()
