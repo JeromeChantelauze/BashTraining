@@ -30,6 +30,10 @@ class byte:
         mask=0
         for idx in range(0, size):
             mask=1+(mask << 1)
+            
+        rst=mask-255
+        rst=rst << (start + 1 - size)
+        self.value=self.value & rst
 
         mask = mask & value
         mask=mask << (start + 1 - size)
