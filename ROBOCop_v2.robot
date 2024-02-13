@@ -86,7 +86,7 @@ Check File
                     Run  echo '${Args}' >> Imposters_v2.robot
                     Run  echo "\ \ Keyword not defined, waiting for implementation." >> Imposters_v2.robot
 
-                    Run  echo 'Should Be True\ \ ${FALSE}\ \ ${KeyWord}' >> testCases_v2.robot
+                    Run  echo 'Should Be True\ \ ${FALSE}\ \ ${KeyWord}\ is not defined' >> testCases_v2.robot
                 ELSE
                     Run  echo 'Should Be True\ \ ${TRUE}\ \ ${KeyWord}' >> testCases_v2.robot
 #                    Log  ${KeyWord}
