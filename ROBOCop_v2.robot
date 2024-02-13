@@ -88,7 +88,7 @@ Check File
 
                     Run  echo 'Should Be True\ \ ${FALSE}\ \ ${KeyWord}\ is not defined' >> testCases_v2.robot
                 ELSE
-                    Run  echo 'Should Be True\ \ ${TRUE}\ \ ${KeyWord}' >> testCases_v2.robot
+                    Run  echo 'Should Be True\ \ ${TRUE}' >> testCases_v2.robot
 #                    Log  ${KeyWord}
                 END
                 Run  echo "" >> testCases_v2.robot
