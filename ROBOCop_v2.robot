@@ -17,8 +17,11 @@ ${EOL}      $
 
 *** Test Cases ***
 Check File
-    Run  rm -f Imposters.robot
-#    Run  rm -f test/testCases.robot
+    Run  rm -f Imposters_v2.robot
+    Run  rm -f testCases_v2.robot
+    Run  echo "*** Settings ***" >> testCases_v2.robot
+    Run  echo "" >> testCases.robot
+    Run  echo "*** Test Cases ***" >> testCases_v2.robot
 #    Run  echo "*** Keywords ***" >> test/testCases.robot
 
     ${Resources}=   Create List
@@ -72,23 +75,23 @@ Check File
                 END
             END
             IF  "${KeyWord}"!="${EMPTY}"
-#                Run  echo "${KeyWord}" >> test/testCases.robot
-#                FOR  ${idx}  IN RANGE  0  4
-#                    Run  echo -n "${SPACE}" >> test/testCases.robot
-#                END
-                IF  not ${isFound}
-                    Log  ${KeyWord}  ERROR
-                    Run  echo "< ${KeyWord} >" >> Imposters.robot
-                    Run  echo -n "\ \ [Arguments] ${Args}" >> Imposters.robot
-                    Run  echo '${Args}' >> Imposters.robot
-                    Run  echo "\ \ Keyword not defined, waiting for implementation." >> Imposters.robot
-
-#                    Run  echo 'Should Be True\ \ ${FALSE}"' >> test/testCases.robot
-                ELSE
-#                    Run  echo 'Should Be True\ \ ${TRUE}\ \ ${KeyWord}' >> test/testCases.robot
-                    Log  ${KeyWord}
+                Run  echo "${KeyWord}" >> testCases_v2.robot
+                FOR  ${idx}  IN RANGE  0  4
+                    Run  echo -n "${SPACE}" >> testCases_v2.robot
                 END
-#                Run  echo "" >> test/testCases.robot
+                IF  not ${isFound}
+#                    Log  ${KeyWord}  ERROR
+                    Run  echo "< ${KeyWord} >" >> Imposters_v2.robot
+                    Run  echo -n "\ \ [Arguments] ${Args}" >> Imposters_v2.robot
+                    Run  echo '${Args}' >> Imposters_v2.robot
+                    Run  echo "\ \ Keyword not defined, waiting for implementation." >> Imposters_v2.robot
+
+                    Run  echo 'Should Be True\ \ ${FALSE}"' >> testCases_v2.robot
+                ELSE
+                    Run  echo 'Should Be True\ \ ${TRUE}\ \ ${KeyWord}' >> testCases_v2.robot
+#                    Log  ${KeyWord}
+                END
+                Run  echo "" >> testCases_v2.robot
             END
         ELSE
             ${Section}=  Get Substring  ${line}  0  5
@@ -98,6 +101,7 @@ Check File
             CONTINUE
         END
     END
+
 
 #    FOR  ${Keyword}  IN  @{Keywords}
 #        Run Keyword And Ignore Error  ${Keyword}
