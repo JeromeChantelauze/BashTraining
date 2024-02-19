@@ -81,36 +81,47 @@ def ex_6():
 
 
 def ex_7():
-    print('List of species present in Season 3')
+    print('Species types that appear in Season 3')
     LSpecies={}
-    Characters=[]
     for EP in range(22, 32):
         result=requests.get(URL+'episode/'+str(EP))
         Dict=json.loads(result.text)
         for UD in Dict['characters']:
-            if UD  in Characters:
-                continue
-            else:
-                Characters.append(UD)
             CResult=requests.get(UD)
             CDict=json.loads(CResult.text)
             Type=CDict['type']
             Species=CDict['species']
+            Name=CDict['name']
             if Species not in LSpecies.keys():
                 LSpecies[Species]=[]
-                LSpecies[Species].append(Type)
+                DType={}
+                DType['type']=Type
+                DType['names']=[]
+                DType['names'].append(Name)
+                LSpecies[Species].append(DType)
             else:
-                if Type not in LSpecies[Species]:
-                    LSpecies[Species].append(Type)
+                TFound=False
+                for DType in LSpecies[Species]:
+                    if DType['type']==Type:
+                        if Name not in DType['names']:
+                            DType['names'].append(Name)
+                        TFound=True
+                        break
+                if not TFound:
+                    DType={}
+                    DType['type']=Type
+                    DType['names']=[]
+                    DType['names'].append(Name)
+                    LSpecies[Species].append(DType)
     for Species in LSpecies.keys():
-        if Species=='Human':
-            print(Species)
-        else:
-            for Type in LSpecies[Species]:
-                if Type=='':
-                    print(Species)
+        if Species!='Human':
+            for DType in LSpecies[Species]:
+                if DType['type']=='':
+                    for Name in DType['names']:
+                        print('Species='+Species+', Name='+Name)
                 else:
-                    print(Species+'/'+Type)
+                    for Name in DType['names']:
+                        print('Species='+Species+', Type='+DType['type']+', Name='+Name)
         
 
 
